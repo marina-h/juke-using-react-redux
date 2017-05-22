@@ -10,6 +10,8 @@ export default function Lyrics (props) {
   const artistChange = e => props.setArtist(e.target.value);
   const songChange = e => props.setSong(e.target.value);
 
+  console.log('Lyrics props', props)
+
   return (
     <div style={{marginTop: '20px'}}>
       <form onSubmit={handleSubmit}>

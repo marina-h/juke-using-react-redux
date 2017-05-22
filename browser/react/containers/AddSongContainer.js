@@ -1,7 +1,7 @@
 import React from 'react';
 import AddSong from '../components/AddSong';
 import store from '../store';
-import {loadAllSongs, addSongToPlaylist} from '../action-creators/playlists';
+import {addSongToPlaylist} from '../action-creators/playlists';
 import {connect} from 'react-redux';
 
 class AddSongContainer extends React.Component {
@@ -26,13 +26,11 @@ class AddSongContainer extends React.Component {
   handleSubmit(evt) {
 
     evt.preventDefault();
-    console.log('state addSongContainer', this.state);
-    const playlistId = this.state.playlists.selected.id;
+    const playlistId = this.props.playlistId;
     const songId = this.state.songId;
 
     store.dispatch(addSongToPlaylist(playlistId, songId))
       .catch(() => this.setState({ error: true }));
-
   }
 
   render() {
@@ -40,16 +38,17 @@ class AddSongContainer extends React.Component {
       <AddSong
         {...this.props}
         handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}/>
+        handleSubmit={this.handleSubmit} />
     );
   }
 }
 
 function mapStateToProps(state, ownProps) {
+  console.log('addSongContainer ownProps', ownProps)
   return {
     songs: state.songs,
     error: state.error,
-    songId: state.songId
+    playlistId: state.playlists.selected.id
   }
 }
 
