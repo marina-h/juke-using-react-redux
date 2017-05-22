@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import store from '../store';
-import Playlist from '../components/Playlist';
-import {toggleSong} from '../action-creators/player';
+import Songs from '../components/Songs';
 import {connect} from 'react-redux';
+import {toggleSong} from '../action-creators/player';
 
 function mapStateToProps(state, ownProps) {
-  console.log('state playlistContainer', state)
-  console.log('ownProps', ownProps)
   return {
-    selectedPlaylist: state.playlists.selected
+    // albums: state.albums,
+    songs: ownProps.songs,
+    currentSong: state.player.song,
+    isPlaying: state.player.isPlaying
   }
 }
 
@@ -23,4 +24,4 @@ function mapDispatchToProps(dispatch, ownProps) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Playlist);
+)(Songs);

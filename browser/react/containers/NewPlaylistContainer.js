@@ -2,6 +2,7 @@ import React from 'react';
 import NewPlaylist from '../components/NewPlaylist';
 import store from '../store';
 import {addNewPlaylist} from '../action-creators/playlists';
+import {connect} from 'react-redux';
 
 class NewPlaylistContainer extends React.Component {
 
@@ -50,4 +51,26 @@ class NewPlaylistContainer extends React.Component {
 
 }
 
-export default NewPlaylistContainer;
+function mapStateToProps(state, ownProps) {
+  const genreName = ownProps.params.genreName;
+  return {
+    genreName: genreName,
+    songs: filterAndConvertSongs(state.songs, genreName),
+    isPlaying: state.player.isPlaying,
+    currentSong: state.player.currentSong
+  }
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    // handleChange: ,
+    // hangleSubmit: 
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewPlaylist);
+
+// export default NewPlaylistContainer;

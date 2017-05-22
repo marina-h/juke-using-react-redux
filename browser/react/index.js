@@ -15,7 +15,7 @@ import StationContainer from './containers/StationContainer';
 
 import App from './components/App';
 import Albums from './components/Albums';
-import Songs from './components/Songs';
+import SongsContainer from './containers/SongsContainer';
 
 import axios from 'axios';
 import store from './store';
@@ -50,6 +50,7 @@ const onArtistEnter = function (nextRouterState) {
 const onPlaylistEnter = function (nextRouterState) {
   const playlistId = nextRouterState.params.playlistId;
   store.dispatch(getPlaylistById(playlistId));
+  store.dispatch(loadAllSongs());
 };
 const onStationsEnter = function(nextRouterState) {
   store.dispatch(loadAllSongs());
@@ -64,7 +65,7 @@ ReactDOM.render(
         <Route path="/artists" component={FilterableArtistsContainer} />
         <Route path="/artists/:artistId" component={ArtistContainer} onEnter={onArtistEnter}>
           <Route path="albums" component={Albums} />
-          <Route path="songs" component={Songs} />
+          <Route path="songs" component={SongsContainer} />
         </Route>
         <Route path="/new-playlist" component={NewPlaylistContainer} />
         <Route path="/playlists/:playlistId" component={PlaylistContainer} onEnter={onPlaylistEnter} />

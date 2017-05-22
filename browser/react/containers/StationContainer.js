@@ -17,10 +17,10 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  console.log('dispatch', dispatch)
-  console.log('ownProps', ownProps)
   return {
-    // toggleOne: dispatch(toggleSong())
+    toggleOne: function(song, list) {
+      dispatch(toggleSong(song, list));
+    }
   };
 }
 
